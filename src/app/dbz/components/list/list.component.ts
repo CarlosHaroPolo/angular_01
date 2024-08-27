@@ -9,13 +9,7 @@ import { Character } from '../../interfaces/character.interface';
 export class ListComponent {
 
   @Output()
-  onDelete:EventEmitter<number> = new EventEmitter();
-
-
-
-
-
-
+  onDelete:EventEmitter<String> = new EventEmitter();
 
   @Input() // traes la inforamacion del padre pero borras la informacion del padre
   public characterList :Character[]=[{
@@ -23,7 +17,9 @@ export class ListComponent {
     power:10
   }]
 
-  onDeleteCharacter(id:number):void{
+  onDeleteCharacter(id?:String):void{
+      if(!id) return;
+
       //TODO:Emitir el id del personaje
       console.log(id);
       this.onDelete.emit(id);

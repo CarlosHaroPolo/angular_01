@@ -1,6 +1,7 @@
 import { Component  } from '@angular/core';
 import { Character } from '../interfaces/character.interface';
 import { AddCharacterComponent } from '../components/add-character/add-character.component';
+import { DbzService } from '../services/dbz.service';
 
 @Component({
   selector: 'app-dbz-main-page',
@@ -9,24 +10,27 @@ import { AddCharacterComponent } from '../components/add-character/add-character
 
 export class MainPageComponent{
 
-//ahora quiero añadir
-public characters:Character[]=[
-  {
-    name:'Krillin',
-    power:1000
-  },
-  {
-    name:'Goku',
-    power:9500
-  }
-];
-//PADRE FUNCION
-onNewCharacter(character :Character):void{
-console.log(character)
-this.characters.push(character);
-}
-onDeleteCharacter(id:number):void{
-  this.characters.splice(id,1);
-}
+
+//La inyección de dependencia implica pasar objetos a una clase, en lugar de permitir que una clase cree objetos internamente. Esto significa que la creación y la gestión de los objetos dependientes se externalizan a un agente externo (el sistema de inyección de dependencias).
+// la inyeccion en agular se hace mediante el constructor
+constructor(private dbzService :DbzService){
+   //esto me va  habilitar toda la informacion del servicio
+
+   //ahora vamos a tabjar con servidor private para eso tenemos volverolo privado
+   // para acceder a su infomrcion va ser por metodos
+    }
+
+    get characters():Character[]{
+      return [...this.dbzService.characters] // le estas diciendo que vas ahcer una copia y va a recortar Character
+    }
+
+     onDeleCharacter(id:String) :void{
+       this.dbzService.deleteCharacterById(id)
+    }
+    onNewCharacter(Character:Character){
+      this.dbzService.addCharacter(Character);
+    }
 
 }
+
+

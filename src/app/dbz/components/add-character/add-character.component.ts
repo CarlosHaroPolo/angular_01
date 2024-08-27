@@ -21,7 +21,7 @@ constructor(){
   // inicializas el caracter
   this.character={
     // ademas se va ver reflezado el cambio en html
-     name:'sddasdsad',
+     name:'carlos',
      power:0
   }
 }
@@ -33,7 +33,7 @@ emitCharacter():void{
   if (this.character.name.length ===0 ) return ;
   //this.onNewCharacter.emit(this.character);
   this.onNewCharacter.emit({ ...this.character });
-this.character.name = ""
+this.character.name = "carlos"
 this.character.power=0;
 
                       //esta es la salida que emite el evento
